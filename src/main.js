@@ -1,6 +1,9 @@
 import { createApp } from 'vue';
+// import 'normalize.css/normalize.css'
 import './assets/css/reset.styl';
 import './assets/css/border.styl';
+
+
 // import './style.styl';
 
 import App from './App.vue';
