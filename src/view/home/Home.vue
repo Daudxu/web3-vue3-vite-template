@@ -5,9 +5,6 @@ import { goerli, mainnet, polygon, polygonMumbai } from "@wagmi/core/chains";
 
 import { Web3Modal } from "@web3modal/html";
 
-import { computed } from 'vue'
-import { useStore } from 'vuex'
-
 import { VERSION } from "../../config/settings"
 
 import {
@@ -15,6 +12,14 @@ import {
   modalConnectors,
   walletConnectProvider,
 } from "@web3modal/ethereum";
+
+import { useStore } from "vuex"
+
+import { computed } from "vue"
+
+import {useState} from '../../hooks/useState'
+import { from } from "rxjs";
+// import {useGetters} from '../../hooks/useGetters'
 
 const chains = [goerli, polygonMumbai,mainnet, polygon];
 
@@ -36,33 +41,41 @@ const web3modal = new Web3Modal(
   ethereumClient
 );
 
+
 export default {
   setup() {
     const store = useStore()
-
+     const storeState = useState('contentStore', ['double'] )
+    //  const storeState1 = useGetters(['count'])
+    //   const storeActions = useActions('contentStore', ['setContentRows'])
     let web3modalObj 
     const  connectWallet = async() => {
       web3modalObj = await web3modal.openModal()
       console.log("==============web3modalObj===============", web3modalObj)
     }
 
-
     const  getRandomInt = (min, max) => {
       return Math.floor(Math.random()*(max-min+1))+min;
     }
+
     const  closeModal = async() => {
       // web3modal.closeModal()
       // let version = process.env.VUE_APP_VERSION
       // setContentRows
       console.log(getRandomInt(0,2))
       let arr = [[1,2,3],[4,5,6],[7,8,9]]
+      // console.log("storeState1", storeState1)
       store.dispatch('contentStore/setContentRows', arr[getRandomInt(0,2)])
-
-      console.log("==============wagmiClient===============", VERSION)
       console.log("==============wagmiClient===============", VERSION)
     }
 
-    return {connectWallet, closeModal, count: computed(() => store.state.contentStore.count), double: computed(() => store.getters.count)}
+    // return {connectWallet, closeModal, count: computed(() => store.state.contentStore.count), double: computed(() => store.getters.count)}
+    return { 
+      connectWallet, 
+      closeModal,
+      double: computed(() => store.state.contentStore.double),
+      count: computed(() => store.getters.count)
+    }
   },
 }
 </script>>

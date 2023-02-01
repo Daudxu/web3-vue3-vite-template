@@ -16,7 +16,7 @@ import * as TYPE from '../actionType/contentStore'
 
 const state = {
   // 默认排序
-  count: 7,
+  double: 7,
   sortKeys: ['douga', 'bangumi', 'music', 'dance', 'game', 'technology', 'life', 'kichiku', 'fashion', 'ad', 'ent', 'movie', 'teleplay'],
   sortIds: [1, 13, 3, 129, 4, 36, 160, 119, 155, 165, 5, 23, 11],
   sortValues: ['动画', '番剧', '音乐', '舞蹈', '游戏', '科技', '生活', '鬼畜', '时尚', '广告', '娱乐', '电影', 'TV剧'],
@@ -26,7 +26,7 @@ const state = {
 }
 
 const getters = {
-  count: state => state.count,
+  double: state => state.double,
   rows: state => state.rows,
   sortKeys: state => state.sortKeys,
   sortIds: state => state.sortIds,
