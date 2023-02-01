@@ -5,7 +5,8 @@ import { goerli, mainnet, polygon, polygonMumbai } from "@wagmi/core/chains";
 
 import { Web3Modal } from "@web3modal/html";
 
-import { onMounted } from "vue"
+import { computed } from 'vue'
+import { useStore } from 'vuex'
 
 import { VERSION } from "../../config/settings"
 
@@ -37,21 +38,31 @@ const web3modal = new Web3Modal(
 
 export default {
   setup() {
-    // onMounted( async () => {
-    //   web3modal.openModal()
-    // })
+    const store = useStore()
+
     let web3modalObj 
     const  connectWallet = async() => {
       web3modalObj = await web3modal.openModal()
       console.log("==============web3modalObj===============", web3modalObj)
     }
+
+
+    const  getRandomInt = (min, max) => {
+      return Math.floor(Math.random()*(max-min+1))+min;
+    }
     const  closeModal = async() => {
       // web3modal.closeModal()
       // let version = process.env.VUE_APP_VERSION
+      // setContentRows
+      console.log(getRandomInt(0,2))
+      let arr = [[1,2,3],[4,5,6],[7,8,9]]
+      store.dispatch('contentStore/setContentRows', arr[getRandomInt(0,2)])
+
+      console.log("==============wagmiClient===============", VERSION)
       console.log("==============wagmiClient===============", VERSION)
     }
 
-    return {connectWallet, closeModal}
+    return {connectWallet, closeModal, count: computed(() => store.state.contentStore.count), double: computed(() => store.getters.count)}
   },
 }
 </script>>
@@ -61,9 +72,11 @@ export default {
       web3 Dapp
     </div>
     <div class="notes-list">
+      <h1>{{ double }}</h1>
       <w3m-network-switch ></w3m-network-switch>
       <w3m-core-button balance="show"></w3m-core-button>
-
+         <p>{{ count }}</p>
+     
       <!-- <router-link to="/example01">初始setup</router-link> -->
       <button class="btu" @click="connectWallet"> openModal</button>
       <button class="btu" @click="closeModal"> closeModal</button>
