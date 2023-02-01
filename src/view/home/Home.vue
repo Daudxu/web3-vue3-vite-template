@@ -7,6 +7,8 @@ import { Web3Modal } from "@web3modal/html";
 
 import { onMounted } from "vue"
 
+import { VERSION } from "../../config/settings"
+
 import {
   EthereumClient,
   modalConnectors,
@@ -45,7 +47,8 @@ export default {
     }
     const  closeModal = async() => {
       // web3modal.closeModal()
-      console.log("==============wagmiClient===============", web3modalObj)
+      // let version = process.env.VUE_APP_VERSION
+      console.log("==============wagmiClient===============", VERSION)
     }
 
     return {connectWallet, closeModal}
