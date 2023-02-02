@@ -1,12 +1,13 @@
 import axios from "axios";
 import store from "../store";
 import router from "../router";
-const baseURL = "http://apipc-xiaotuxian-front.itheima.net";
+// const baseURL = "http://apipc-xiaotuxian-front.itheima.net";
+const baseURL = "/mock";
 const instance = axios.create({
     baseURL,
     timeout: 5000
 })
-// 请求拦截器
+
 instance.interceptors.request.use(
     (config) => {
         const { profile } = store.state.user

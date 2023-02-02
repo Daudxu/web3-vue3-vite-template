@@ -9,6 +9,7 @@ import './assets/css/border.styl';
 import App from './App.vue';
 import store from "./store";
 import router from "./router/index";
+import './mock/mock.js'
 
 const app = createApp(App);
 app.use(store) ;
