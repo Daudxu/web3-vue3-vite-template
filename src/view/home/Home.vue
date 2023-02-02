@@ -59,12 +59,9 @@ export default {
     }
 
     const  closeModal = async() => {
-      // web3modal.closeModal()
-      // let version = process.env.VUE_APP_VERSION
-      // setContentRows
+
       console.log(getRandomInt(0,2))
       let arr = [[1,2,3],[4,5,6],[7,8,9]]
-      // console.log("storeState1", storeState1)
       store.dispatch('contentStore/setContentRows', arr[getRandomInt(0,2)])
       console.log("==============wagmiClient===============", VERSION)
     }
